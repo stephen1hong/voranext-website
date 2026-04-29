@@ -1,5 +1,5 @@
 // ========================================
-// Boneng Tech — Script
+// Voranex.ai — Script
 // ========================================
 
 document.addEventListener('DOMContentLoaded', () => {

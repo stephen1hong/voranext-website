@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.boneng-tech.com/sitemap.xml
+Sitemap: https://www.voranext.ai/sitemap.xml
