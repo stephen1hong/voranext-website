@@ -1,6 +1,103 @@
 // ========================================
-// Voranex.ai — Script
+// Voranext.ai — Script
 // ========================================
+
+// ========================================
+// ANTI-REDIRECT PROTECTION
+// Prevents malicious redirects and monitors suspicious activity
+// ========================================
+(function() {
+    'use strict';
+
+    // Whitelist of allowed domains for any future external links
+    const ALLOWED_DOMAINS = [
+        'www.voranext.ai',
+        'voranext.ai'
+    ];
+
+    // Block unauthorized window.open
+    const originalWindowOpen = window.open;
+    window.open = function(...args) {
+        console.warn('Blocked window.open attempt:', args);
+        return null;
+    };
+
+    // Block unauthorized location changes
+    let isInternalNavigation = false;
+    const originalPushState = history.pushState;
+    const originalReplaceState = history.replaceState;
+
+    history.pushState = function(...args) {
+        if (!isInternalNavigation) {
+            console.warn('Blocked unauthorized history.pushState');
+            return;
+        }
+        return originalPushState.apply(this, args);
+    };
+
+    history.replaceState = function(...args) {
+        if (!isInternalNavigation) {
+            console.warn('Blocked unauthorized history.replaceState');
+            return;
+        }
+        return originalReplaceState.apply(this, args);
+    };
+
+    // Monitor and validate all link clicks
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (link && link.href) {
+            const url = new URL(link.href, window.location.origin);
+
+            // Allow anchor links on same page
+            if (url.hash && url.pathname === window.location.pathname) {
+                return; // Internal navigation is OK
+            }
+
+            // Block external redirects
+            if (url.hostname !== window.location.hostname) {
+                if (!ALLOWED_DOMAINS.includes(url.hostname)) {
+                    e.preventDefault();
+                    console.error('Blocked unauthorized external redirect to:', url.href);
+                    alert('Security: External navigation blocked');
+                    return false;
+                }
+            }
+        }
+    }, true);
+
+    // Block meta refresh attempts
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            mutation.addedNodes.forEach(function(node) {
+                if (node.nodeName === 'META' && node.httpEquiv === 'refresh') {
+                    node.remove();
+                    console.error('Blocked malicious meta refresh redirect');
+                }
+            });
+        });
+    });
+
+    observer.observe(document.documentElement, {
+        childList: true,
+        subtree: true
+    });
+
+    // Monitor for suspicious iframe injections
+    setInterval(function() {
+        const iframes = document.querySelectorAll('iframe');
+        iframes.forEach(function(iframe) {
+            // Remove any iframes not from allowed sources
+            const src = iframe.src || '';
+            if (src && !ALLOWED_DOMAINS.some(domain => src.includes(domain))) {
+                iframe.remove();
+                console.error('Removed suspicious iframe:', src);
+            }
+        });
+    }, 2000);
+
+    console.log('🔒 Anti-redirect protection active');
+})();
 
 document.addEventListener('DOMContentLoaded', () => {
 
