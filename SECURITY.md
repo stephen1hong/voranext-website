@@ -130,7 +130,7 @@ All blocked attempts are logged to browser console:
 ## 📞 Security Contact
 
 If you discover a security vulnerability, please email:
-- security@voranext.ai
+- security@voranex.ai
 
 Or use our security.txt file:
-- https://www.voranext.ai/.well-known/security.txt
+- https://www.voranex.ai/.well-known/security.txt

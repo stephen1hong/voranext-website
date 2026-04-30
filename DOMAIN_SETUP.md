@@ -1,5 +1,5 @@
 # Domain Setup & Security Guide
-## voranext.ai on GoDaddy → GitHub Pages
+## voranex.ai on GoDaddy → GitHub Pages
 
 ---
 
@@ -24,7 +24,7 @@
 **Prevents domain theft**
 
 1. Go to: https://dcc.godaddy.com/domains
-2. Click on **voranext.ai**
+2. Click on **voranex.ai**
 3. Scroll to **Additional Settings** section
 4. Find **Domain Lock** or **Transfer Lock**
 5. Toggle it to **ON** (locked position)
@@ -39,7 +39,7 @@
 ### Step 3: Update Domain Contact Information
 **Make sure it's YOUR email**
 
-1. In domain settings for voranext.ai
+1. In domain settings for voranex.ai
 2. Go to **Contact Information**
 3. Verify these are YOUR email addresses:
    - Registrant Email
@@ -54,7 +54,7 @@
 ### Step 4: Enable Domain Privacy Protection
 **Hides your personal info from WHOIS**
 
-1. In domain settings for voranext.ai
+1. In domain settings for voranex.ai
 2. Look for **Domain Privacy** or **Privacy Protection**
 3. Toggle to **ON**
 4. This may cost extra (~$10/year) but worth it
@@ -68,7 +68,7 @@
 ### Step 5: Access DNS Management
 
 1. Go to: https://dcc.godaddy.com/domains
-2. Click on **voranext.ai**
+2. Click on **voranex.ai**
 3. Click **DNS** or **Manage DNS**
 4. You'll see a list of DNS records
 
@@ -92,7 +92,7 @@ Click **Save**
 
 ---
 
-### Step 7: Add A Records for Apex Domain (voranext.ai)
+### Step 7: Add A Records for Apex Domain (voranex.ai)
 
 **Delete any existing A records for '@' first**
 
@@ -168,7 +168,7 @@ TTL: 600
 
 **Prevents DNS spoofing attacks**
 
-1. In GoDaddy DNS management for voranext.ai
+1. In GoDaddy DNS management for voranex.ai
 2. Look for **DNSSEC** section (might be under "Advanced Features")
 3. Click **Manage** or **Enable**
 4. Follow the wizard
@@ -184,8 +184,8 @@ TTL: 600
 
 ### Step 10: Verify Domain on GitHub
 
-1. Go to: https://github.com/stephen1hong/voranext-website/settings/pages
-2. Under **Custom domain**, you should see: `www.voranext.ai`
+1. Go to: https://github.com/stephen1hong/voranex-website/settings/pages
+2. Under **Custom domain**, you should see: `www.voranex.ai`
 3. Wait for DNS check (can take 5-10 minutes after DNS changes)
 4. You'll see a green checkmark when successful
 
@@ -214,12 +214,12 @@ TTL: 600
 **Wait 10-30 minutes after DNS changes, then test:**
 
 1. Open incognito/private browser window
-2. Visit: http://www.voranext.ai
+2. Visit: http://www.voranex.ai
    - Should redirect to HTTPS automatically
-3. Visit: https://www.voranext.ai
+3. Visit: https://www.voranex.ai
    - Should load your website with green padlock
-4. Visit: http://voranext.ai (without www)
-   - Should redirect to https://www.voranext.ai
+4. Visit: http://voranex.ai (without www)
+   - Should redirect to https://www.voranex.ai
 
 **Status:** ⬜ All URLs Working
 
@@ -228,7 +228,7 @@ TTL: 600
 ### Step 13: Check Security Headers
 
 1. Go to: https://securityheaders.com
-2. Enter: `https://www.voranext.ai`
+2. Enter: `https://www.voranex.ai`
 3. Click **Scan**
 4. You should see **A** or **A+** rating
 
@@ -239,7 +239,7 @@ TTL: 600
 ### Step 14: Check SSL Certificate
 
 1. Go to: https://www.ssllabs.com/ssltest/
-2. Enter: `www.voranext.ai`
+2. Enter: `www.voranex.ai`
 3. Click **Submit**
 4. Wait for scan (takes 2-3 minutes)
 5. You should see **A** or **A+** rating
@@ -294,7 +294,7 @@ TTL: 600
 ### "Security rating is low"
 - Wait for site to fully deploy
 - Clear browser cache and test again
-- Verify CNAME file contains exactly: `www.voranext.ai`
+- Verify CNAME file contains exactly: `www.voranex.ai`
 
 ---
 

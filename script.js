@@ -1,5 +1,5 @@
 // ========================================
-// Voranext.ai — Script
+// Voranex.ai — Script
 // ========================================
 
 // ========================================
@@ -11,8 +11,8 @@
 
     // Whitelist of allowed domains for any future external links
     const ALLOWED_DOMAINS = [
-        'www.voranext.ai',
-        'voranext.ai'
+        'www.voranex.ai',
+        'voranex.ai'
     ];
 
     // Block unauthorized window.open

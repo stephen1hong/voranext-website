@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a static website for Voranext.ai, a healthcare AI company. It's a single-page application built with vanilla HTML, CSS, and JavaScript — no frameworks, no build process, no dependencies.
+This is a static website for Voranex.ai, a healthcare AI company. It's a single-page application built with vanilla HTML, CSS, and JavaScript — no frameworks, no build process, no dependencies.
 
 **Live site:** https://www.voranex.ai (hosted on GitHub Pages)
 
@@ -19,7 +19,7 @@ The entire website is composed of three core files:
 Supporting files:
 - `CNAME` - Custom domain configuration for GitHub Pages
 - `sitemap.xml`, `robots.txt` - SEO files
-- Image assets: `Voranext_Logo.png` (logo), `AI_Agents_Clinical_Decision_Support.jpg`, `Future_Clinical_Intelligence.jpg`
+- Image assets: `Voranex_Logo.png` (logo), `AI_Agents_Clinical_Decision_Support.jpg`, `Future_Clinical_Intelligence.jpg`
 
 ## Development Workflow
 

@@ -1,5 +1,5 @@
-Contact: mailto:security@voranext.ai
+Contact: mailto:security@voranex.ai
 Expires: 2027-12-31T23:59:59.000Z
 Preferred-Languages: en
-Canonical: https://www.voranext.ai/.well-known/security.txt
-Policy: https://www.voranext.ai/security-policy
+Canonical: https://www.voranex.ai/.well-known/security.txt
+Policy: https://www.voranex.ai/security-policy
