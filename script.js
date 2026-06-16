@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             // Validate email
@@ -355,8 +355,32 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.innerHTML = '<span class="btn-spinner"></span> Sending...';
             btn.disabled = true;
 
-            setTimeout(() => {
-                btn.innerHTML = 'Sorry, this is temporarily unavailable due to a technical issue — it will be ready soon';
+            try {
+                const formData = new FormData(contactForm);
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Success message
+                    btn.innerHTML = '✓ Message Sent Successfully!';
+                    btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                    contactForm.reset();
+
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.style.background = '';
+                        btn.disabled = false;
+                    }, 4000);
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                // Error message
+                btn.innerHTML = '✗ Failed to send. Please try again or email us directly.';
                 btn.style.background = 'linear-gradient(135deg, #ef4444, #f97316)';
 
                 setTimeout(() => {
@@ -364,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.style.background = '';
                     btn.disabled = false;
                 }, 4000);
-            }, 1500);
+            }
         });
     }
 
