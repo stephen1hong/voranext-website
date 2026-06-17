@@ -403,4 +403,220 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ========================================
+    // Demo Chat Functionality
+    // ========================================
+
+    // Mock clinical responses database
+    const mockResponses = {
+        "what are the symptoms of diabetes": {
+            answer: "According to the retrieved clinical documents, common symptoms of diabetes include:\n\n• **Increased thirst and frequent urination** - The body tries to eliminate excess glucose through urine\n• **Extreme fatigue** - Cells aren't getting enough glucose for energy\n• **Blurred vision** - High blood sugar levels can affect the lens of the eye\n• **Slow-healing wounds** - High glucose levels impair circulation and immune response\n• **Unexplained weight loss** - Especially in Type 1 diabetes\n• **Tingling or numbness** - In hands and feet, indicating nerve damage\n\nThese symptoms may develop gradually in Type 2 diabetes but can appear suddenly in Type 1 diabetes. Early detection and management are crucial for preventing complications.",
+            sources: ["PMID:34521245", "PMID:33891047", "PMC-Patients-127"]
+        },
+        "how is hypertension diagnosed": {
+            answer: "Based on the clinical literature, hypertension is diagnosed through the following process:\n\n**Blood Pressure Measurement:**\n• Multiple readings taken on separate occasions\n• Both systolic (top number) and diastolic (bottom number) pressures recorded\n• Readings consistently ≥130/80 mmHg indicate hypertension (ACC/AHA guidelines)\n\n**Diagnostic Steps:**\n1. **Initial Screening** - Blood pressure checked during routine visits\n2. **Confirmation** - At least 2-3 elevated readings on different days\n3. **Ambulatory Monitoring** - 24-hour BP monitoring may be used for confirmation\n4. **Physical Examination** - Check for signs of end-organ damage\n5. **Laboratory Tests** - Assess kidney function, blood sugar, cholesterol\n\n**Classification:**\n• Elevated: 120-129/<80 mmHg\n• Stage 1: 130-139/80-89 mmHg\n• Stage 2: ≥140/≥90 mmHg\n\nEarly diagnosis allows for lifestyle modifications and treatment to prevent cardiovascular complications.",
+            sources: ["PMID:29146535", "PMID:31843071", "PMC-Patients-89"]
+        },
+        "what treatments are available for heart failure": {
+            answer: "The clinical evidence supports a multi-faceted treatment approach for heart failure:\n\n**Pharmacological Treatments:**\n• **ACE Inhibitors/ARBs** - Reduce workload on the heart, improve survival\n• **Beta-blockers** - Slow heart rate, reduce blood pressure\n• **Diuretics** - Remove excess fluid, reduce symptoms\n• **Aldosterone antagonists** - Improve outcomes in advanced heart failure\n• **SGLT2 Inhibitors** - Newer class showing significant benefit\n\n**Device Therapy:**\n• **Implantable cardioverter-defibrillator (ICD)** - For arrhythmia risk\n• **Cardiac resynchronization therapy (CRT)** - For certain heart failure patterns\n• **Ventricular assist devices (VADs)** - For advanced cases\n\n**Lifestyle Modifications:**\n• Sodium restriction (<2g/day)\n• Fluid management\n• Regular exercise (as tolerated)\n• Weight monitoring\n• Smoking cessation\n\n**Advanced Options:**\n• Heart transplantation for end-stage disease\n\nTreatment is individualized based on ejection fraction, symptoms, and comorbidities. Regular monitoring and medication adherence are essential for optimal outcomes.",
+            sources: ["PMID:35363499", "PMID:34449189", "PMC-Patients-203"]
+        },
+        "summarize diabetes management strategies": {
+            answer: "**Comprehensive Diabetes Management Summary:**\n\n**Glycemic Control:**\n• Target HbA1c <7% for most adults (individualized targets)\n• Regular blood glucose monitoring\n• Medication titration based on response\n\n**Pharmacotherapy:**\n• Metformin as first-line for Type 2 diabetes\n• Additional agents: SGLT2 inhibitors, GLP-1 agonists, DPP-4 inhibitors\n• Insulin therapy when oral agents insufficient\n• Newer agents show cardiovascular and renal benefits\n\n**Lifestyle Interventions:**\n• Medical nutrition therapy with carbohydrate management\n• Regular physical activity (150 min/week moderate exercise)\n• Weight management (5-10% loss improves outcomes)\n• Smoking cessation\n\n**Complication Prevention:**\n• Annual eye exams for retinopathy screening\n• Regular foot examinations\n• Blood pressure control (<130/80 mmHg)\n• Lipid management with statins\n• Kidney function monitoring\n\n**Patient Education:**\n• Self-management training\n• Recognition of hypo/hyperglycemia\n• Sick day management\n\nA team-based approach involving physicians, diabetes educators, dietitians, and pharmacists optimizes outcomes. Regular monitoring and treatment adjustments are key to preventing long-term complications.",
+            sources: ["PMID:34399612", "PMID:33510071", "PMC-Patients-156", "PMC-Patients-178"]
+        },
+        "what are the signs of pneumonia": {
+            answer: "Clinical documentation indicates that pneumonia presents with the following signs and symptoms:\n\n**Respiratory Symptoms:**\n• **Cough** - Often productive with yellow, green, or bloody sputum\n• **Shortness of breath** - May worsen with activity\n• **Chest pain** - Sharp, worse with breathing or coughing (pleuritic)\n• **Rapid, shallow breathing**\n\n**Systemic Symptoms:**\n• **Fever** - Often high grade (>100.4°F/38°C)\n• **Chills and sweating**\n• **Fatigue and weakness**\n• **Loss of appetite**\n• **Confusion** - Especially in elderly patients\n\n**Physical Examination Findings:**\n• Crackles or rales on lung auscultation\n• Decreased breath sounds\n• Dullness to percussion\n• Increased tactile fremitus\n\n**Diagnostic Confirmation:**\n• Chest X-ray showing infiltrates\n• Elevated white blood cell count\n• Sputum culture if bacterial pneumonia suspected\n• Pulse oximetry may show low oxygen saturation\n\n**Risk Factors:**\n• Age >65 or <2 years\n• Chronic diseases (COPD, diabetes, heart disease)\n• Weakened immune system\n• Smoking\n\nEarly recognition and treatment with appropriate antibiotics (for bacterial pneumonia) or supportive care (for viral pneumonia) is important for preventing complications.",
+            sources: ["PMID:32004513", "PMID:33891156", "PMC-Patients-241"]
+        }
+    };
+
+    // Get a mock response based on query
+    function getMockResponse(query) {
+        const normalizedQuery = query.toLowerCase().trim();
+
+        // Check for exact or partial matches
+        for (const [key, response] of Object.entries(mockResponses)) {
+            if (normalizedQuery.includes(key) || key.includes(normalizedQuery)) {
+                return response;
+            }
+        }
+
+        // Check for summary keywords
+        if (normalizedQuery.includes('summarize') || normalizedQuery.includes('summary') || normalizedQuery.includes('overview')) {
+            return {
+                answer: "I can help summarize clinical information from medical documents. The system uses retrieval-augmented generation (RAG) to find relevant clinical cases and synthesize key information.\n\nFor this demo, try one of the example questions on the left, or ask about:\n• Symptoms of specific conditions\n• Diagnostic approaches\n• Treatment options\n• Management strategies",
+                sources: ["Demo Response"]
+            };
+        }
+
+        // Default response for unknown queries
+        return {
+            answer: "Thank you for your question! In a production environment, I would search through thousands of clinical documents to find relevant information and provide a comprehensive answer with source citations.\n\nFor this demo, please try one of the example questions on the left to see how the system works with real clinical data.",
+            sources: ["Demo Response"]
+        };
+    }
+
+    // Add message to chat
+    function addMessage(content, isUser = false, sources = null) {
+        const messagesContainer = document.getElementById('chatMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message message-${isUser ? 'user' : 'assistant'}`;
+
+        const avatarDiv = document.createElement('div');
+        avatarDiv.className = 'message-avatar';
+        avatarDiv.innerHTML = isUser
+            ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
+            : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'message-content';
+
+        // Format content with line breaks
+        const paragraphs = content.split('\n\n');
+        paragraphs.forEach(para => {
+            const p = document.createElement('p');
+            p.innerHTML = para.replace(/\n/g, '<br>');
+            contentDiv.appendChild(p);
+        });
+
+        // Add sources if provided
+        if (sources && sources.length > 0) {
+            const sourcesDiv = document.createElement('div');
+            sourcesDiv.className = 'message-sources';
+
+            const sourcesTitle = document.createElement('div');
+            sourcesTitle.className = 'message-sources-title';
+            sourcesTitle.textContent = 'Sources';
+            sourcesDiv.appendChild(sourcesTitle);
+
+            const sourcesContainer = document.createElement('div');
+            sources.forEach(source => {
+                const sourceTag = document.createElement('span');
+                sourceTag.className = 'source-tag';
+                sourceTag.textContent = source;
+                sourcesContainer.appendChild(sourceTag);
+            });
+            sourcesDiv.appendChild(sourcesContainer);
+            contentDiv.appendChild(sourcesDiv);
+        }
+
+        messageDiv.appendChild(avatarDiv);
+        messageDiv.appendChild(contentDiv);
+        messagesContainer.appendChild(messageDiv);
+
+        // Scroll to bottom
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Show typing indicator
+    function showTypingIndicator() {
+        const messagesContainer = document.getElementById('chatMessages');
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message message-assistant';
+        typingDiv.id = 'typingIndicator';
+
+        const avatarDiv = document.createElement('div');
+        avatarDiv.className = 'message-avatar';
+        avatarDiv.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'message-content';
+
+        const typingAnimation = document.createElement('div');
+        typingAnimation.className = 'message-typing';
+        typingAnimation.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+        contentDiv.appendChild(typingAnimation);
+
+        typingDiv.appendChild(avatarDiv);
+        typingDiv.appendChild(contentDiv);
+        messagesContainer.appendChild(typingDiv);
+
+        // Scroll to bottom
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Remove typing indicator
+    function removeTypingIndicator() {
+        const typingIndicator = document.getElementById('typingIndicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+
+    // Handle sending message
+    async function sendMessage(query) {
+        if (!query.trim()) return;
+
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('chatSendBtn');
+
+        // Disable input
+        chatInput.disabled = true;
+        sendBtn.disabled = true;
+
+        // Add user message
+        addMessage(query, true);
+
+        // Clear input
+        chatInput.value = '';
+
+        // Show typing indicator
+        showTypingIndicator();
+
+        // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
+
+        // Remove typing indicator
+        removeTypingIndicator();
+
+        // Get mock response
+        const response = getMockResponse(query);
+
+        // Add assistant message
+        addMessage(response.answer, false, response.sources);
+
+        // Re-enable input
+        chatInput.disabled = false;
+        sendBtn.disabled = false;
+        chatInput.focus();
+    }
+
+    // Initialize demo chat
+    function initDemoChat() {
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('chatSendBtn');
+        const exampleBtns = document.querySelectorAll('.example-btn');
+
+        // Handle send button click
+        if (sendBtn) {
+            sendBtn.addEventListener('click', () => {
+                const query = chatInput.value;
+                sendMessage(query);
+            });
+        }
+
+        // Handle enter key
+        if (chatInput) {
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    const query = chatInput.value;
+                    sendMessage(query);
+                }
+            });
+        }
+
+        // Handle example buttons
+        exampleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const question = btn.getAttribute('data-question');
+                sendMessage(question);
+            });
+        });
+    }
+
+    // Initialize demo when ready
+    initDemoChat();
+
 });
