@@ -568,17 +568,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Clear previous Q&A pairs (keep only initial greeting)
+    // Clear all previous messages
     function clearPreviousMessages() {
         const messagesContainer = document.getElementById('chatMessages');
-        const messages = messagesContainer.querySelectorAll('.message');
-
-        // Remove all messages except the first one (initial greeting)
-        messages.forEach((message, index) => {
-            if (index > 0) {
-                message.remove();
-            }
-        });
+        // Remove all messages
+        messagesContainer.innerHTML = '';
     }
 
     // Handle sending message
