@@ -44,15 +44,9 @@ The site automatically deploys to GitHub Pages on push to the `main` branch. No 
 
 ### Git Workflow
 
-- Production branch: `main` (GitHub Pages deploys from here automatically)
-- Development happens on `master` branch
-- To deploy changes: merge `master` into `main` and push
-
-```bash
-git checkout main
-git merge master
-git push origin main
-```
+- Single branch workflow: `main` (GitHub Pages deploys automatically on push)
+- All changes are committed directly to `main`
+- See `DOMAIN_SETUP.md` for detailed domain and DNS configuration instructions
 
 ## Architecture Notes
 
