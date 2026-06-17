@@ -568,12 +568,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Clear previous Q&A pairs (keep only initial greeting)
+    function clearPreviousMessages() {
+        const messagesContainer = document.getElementById('chatMessages');
+        const messages = messagesContainer.querySelectorAll('.message');
+
+        // Remove all messages except the first one (initial greeting)
+        messages.forEach((message, index) => {
+            if (index > 0) {
+                message.remove();
+            }
+        });
+    }
+
     // Handle sending message
     async function sendMessage(query) {
         if (!query.trim()) return;
 
         const chatInput = document.getElementById('chatInput');
         const sendBtn = document.getElementById('chatSendBtn');
+
+        // Clear previous Q&A pairs
+        clearPreviousMessages();
 
         // Disable input
         chatInput.disabled = true;
