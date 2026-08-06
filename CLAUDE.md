@@ -40,13 +40,25 @@ Since this is a static site with no build process, you can:
 
 ### Deployment
 
-The site automatically deploys to GitHub Pages on push to the `main` branch. No manual deployment steps needed.
+The site automatically deploys to GitHub Pages on push to the `main` branch via GitHub Actions (`.github/workflows/deploy.yml`). No manual deployment steps needed.
+
+The workflow:
+1. Triggers on push to `main` or manual dispatch
+2. Uploads entire directory as artifact
+3. Deploys to GitHub Pages environment
 
 ### Git Workflow
 
 - Single branch workflow: `main` (GitHub Pages deploys automatically on push)
 - All changes are committed directly to `main`
-- See `DOMAIN_SETUP.md` for detailed domain and DNS configuration instructions
+
+### Additional Documentation
+
+- `DOMAIN_SETUP.md` - Detailed domain and DNS configuration instructions
+- `EMAIL_SETUP.md` - Zoho Mail setup guide for professional email
+- `SECURITY.md` - Comprehensive security protections and anti-redirect measures
+- `DEPLOYMENT_SUMMARY.md` - Deployment overview and history
+- `PERMANENT_HOSTING.md` - GitHub Pages hosting documentation
 
 ## Architecture Notes
 
@@ -65,8 +77,9 @@ The JavaScript handles:
 - **Scroll animations:** Intersection Observer for fade-in effects with staggered delays
 - **Hero effects:** Parallax glow on mouse movement, animated stat counters
 - **Service cards:** 3D tilt effect on hover
-- **Form handling:** Client-side validation (form submission currently returns a "temporarily unavailable" message)
+- **Form handling:** Integrated with Web3Forms (access key: `c32b6ad3-9447-4cb9-b115-de956dfc77dd`), includes client-side validation
 - **Smooth scrolling:** For anchor links with navbar offset
+- **Security protections:** Multi-layer defense against redirects, XSS, and injection attacks (see SECURITY.md for details)
 
 ### SEO & Meta
 
@@ -107,6 +120,7 @@ Add new features to `script.js` within the `DOMContentLoaded` event listener. Ex
 
 - **No build step:** Changes take effect immediately, test thoroughly before committing
 - **Performance:** Keep images optimized; current JPGs are for hero/feature images
-- **Form backend:** Contact form currently shows an error message — needs backend integration to function
+- **Form backend:** Contact form uses Web3Forms service - already functional and configured
 - **Custom domain:** The CNAME file must contain exactly `www.voranex.ai` for proper routing
 - **Missing assets:** HTML references `logo-icon.svg` as favicon which doesn't exist — browser will show default icon until added
+- **Security:** Site implements extensive security protections including CSP headers, runtime protections against redirects, and XSS prevention (see SECURITY.md)
