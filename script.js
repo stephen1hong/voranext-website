@@ -12,7 +12,8 @@
     // Whitelist of allowed domains for any future external links
     const ALLOWED_DOMAINS = [
         'www.voranex.ai',
-        'voranex.ai'
+        'voranex.ai',
+        'github.com'
     ];
 
     // Block unauthorized window.open
