@@ -18,8 +18,11 @@ The entire website is composed of three core files:
 
 Supporting files:
 - `CNAME` - Custom domain configuration for GitHub Pages
+- `.nojekyll` - Prevents Jekyll processing on GitHub Pages (required for static deployment)
 - `sitemap.xml`, `robots.txt` - SEO files
+- `.well-known/security.txt` - Security disclosure contact information (RFC 9116 compliant)
 - Image assets: `Voranex_Logo.png` (logo), `AI_Agents_Clinical_Decision_Support.jpg`, `Future_Clinical_Intelligence.jpg`
+- Video asset: `Agentic-Clinical-Document-Investigation-Platform.mp4` (demo video, not currently used in index.html)
 
 ## Development Workflow
 
@@ -51,6 +54,7 @@ The workflow:
 
 - Single branch workflow: `main` (GitHub Pages deploys automatically on push)
 - All changes are committed directly to `main`
+- `.netlify/` directory exists from previous hosting setup but is no longer used (now on GitHub Pages)
 
 ### Additional Documentation
 
@@ -119,8 +123,9 @@ Add new features to `script.js` within the `DOMContentLoaded` event listener. Ex
 ## Important Considerations
 
 - **No build step:** Changes take effect immediately, test thoroughly before committing
-- **Performance:** Keep images optimized; current JPGs are for hero/feature images
+- **Performance:** Keep images optimized; current JPGs are for hero/feature images. The 89MB MP4 video file exists but is not currently used in the site.
 - **Form backend:** Contact form uses Web3Forms service - already functional and configured
 - **Custom domain:** The CNAME file must contain exactly `www.voranex.ai` for proper routing
 - **Missing assets:** HTML references `logo-icon.svg` as favicon which doesn't exist — browser will show default icon until added
-- **Security:** Site implements extensive security protections including CSP headers, runtime protections against redirects, and XSS prevention (see SECURITY.md)
+- **Security:** Site implements extensive security protections including CSP headers, runtime protections against redirects, and XSS prevention (see SECURITY.md). Security contact: security@voranex.ai (.well-known/security.txt)
+- **GitHub Pages:** The `.nojekyll` file is required to prevent GitHub Pages from processing the site with Jekyll

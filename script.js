@@ -650,7 +650,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize demo when ready
+    // Initialize demo tabs
+    function initDemoTabs() {
+        const demoTabs = document.querySelectorAll('.demo-tab');
+        const chatDemo = document.getElementById('chatDemo');
+        const videoDemo = document.getElementById('videoDemo');
+
+        demoTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const demoType = tab.getAttribute('data-demo');
+
+                // Update active tab
+                demoTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Show/hide demo containers
+                if (demoType === 'chat') {
+                    chatDemo.style.display = 'grid';
+                    videoDemo.style.display = 'none';
+                    // Pause video when switching away
+                    const video = videoDemo.querySelector('video');
+                    if (video) video.pause();
+                } else if (demoType === 'video') {
+                    chatDemo.style.display = 'none';
+                    videoDemo.style.display = 'block';
+                }
+            });
+        });
+    }
+
+    // Initialize demo tabs and chat when ready
+    initDemoTabs();
     initDemoChat();
 
 });

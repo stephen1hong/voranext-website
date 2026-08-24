@@ -291,10 +291,24 @@
     <div class="container">
         <div class="section-header">
             <span class="section-tag">Try It Live</span>
-            <h2><span class="text-gradient">Clinical AI Assistant</span></h2>
-            <p>Ask questions about clinical documents and see how our AI retrieves and summarizes medical information.</p>
+            <h2><span class="text-gradient">Experience Our AI Solutions</span></h2>
+            <p>Explore interactive demos showcasing our clinical AI capabilities</p>
         </div>
-        <div class="demo-container">
+
+        <!-- Demo Tabs -->
+        <div class="demo-tabs">
+            <button class="demo-tab active" data-demo="chat">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Clinical AI Assistant
+            </button>
+            <button class="demo-tab" data-demo="video">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                Agentic Clinical Document Investigation Platform
+            </button>
+        </div>
+
+        <!-- Chat Demo Container -->
+        <div class="demo-container" id="chatDemo">
             <div class="demo-sidebar">
                 <h3>Example Questions</h3>
                 <p class="demo-sidebar-subtitle">Click to try</p>
@@ -379,6 +393,26 @@
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Demo Container -->
+        <div class="demo-container video-demo-container" id="videoDemo" style="display: none;">
+            <div class="video-demo-content">
+                <div class="video-demo-header">
+                    <h3>Agentic Clinical Document Investigation Platform</h3>
+                    <p>Watch how our AI agents autonomously analyze and investigate clinical documents, providing intelligent insights and decision support.</p>
+                </div>
+                <div class="video-wrapper">
+                    <video controls controlsList="nodownload" preload="metadata">
+                        <source src="Agentic-Clinical-Document-Investigation-Platform.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video-demo-info">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    <p>This video demonstrates our agentic platform investigating clinical documents using advanced AI capabilities.</p>
                 </div>
             </div>
         </div>
