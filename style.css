@@ -417,7 +417,7 @@ body {
 
 .stat-label {
     font-size: 0.8rem;
-    color: var(--text-muted);
+    color: #e5e7eb;
     margin-top: 4px;
 }
 
