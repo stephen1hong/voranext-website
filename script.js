@@ -159,6 +159,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ---- Dropdown menu toggle (for mobile/touch devices) ----
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            // On mobile, toggle dropdown on click
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const dropdown = toggle.closest('.nav-dropdown');
+                const menu = dropdown.querySelector('.dropdown-menu');
+                const isOpen = menu.style.display === 'block';
+
+                // Close all other dropdowns
+                document.querySelectorAll('.dropdown-menu').forEach(m => {
+                    m.style.display = 'none';
+                });
+
+                // Toggle current dropdown
+                menu.style.display = isOpen ? 'none' : 'block';
+                menu.style.opacity = isOpen ? '0' : '1';
+                menu.style.visibility = isOpen ? 'hidden' : 'visible';
+            }
+        });
+    });
+
+    // Close dropdowns on outside click
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-dropdown')) {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = '';
+                menu.style.opacity = '';
+                menu.style.visibility = '';
+            });
+        }
+    });
+
     // ---- Active nav link on scroll ----
     const sections = document.querySelectorAll('section[id]');
 

@@ -157,6 +157,70 @@ body {
     color: var(--text-primary);
 }
 
+/* Dropdown Menu Styles */
+.nav-dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.dropdown-toggle::after {
+    content: '▼';
+    font-size: 0.65rem;
+    transition: var(--transition);
+}
+
+.nav-dropdown:hover .dropdown-toggle::after {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 8px 0;
+    min-width: 200px;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.dropdown-menu a:hover {
+    background: var(--gradient-subtle);
+    color: var(--accent-1);
+}
+
 .mobile-toggle {
     display: none;
     flex-direction: column;
@@ -985,6 +1049,25 @@ body {
 
     .mobile-toggle {
         display: flex;
+    }
+
+    /* Dropdown adjustments for mobile */
+    .dropdown-menu {
+        position: static;
+        transform: none;
+        margin-top: 8px;
+        margin-left: 16px;
+        box-shadow: none;
+        border-left: 2px solid var(--accent-2);
+        border-radius: 0;
+    }
+
+    .dropdown-toggle::after {
+        content: '▶';
+    }
+
+    .nav-dropdown:hover .dropdown-toggle::after {
+        transform: rotate(90deg);
     }
 
     .hero h1 {
