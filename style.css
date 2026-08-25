@@ -689,6 +689,38 @@ body {
 }
 
 /* ========================================
+   Industries Section
+   ======================================== */
+.industries {
+    padding: 120px 0;
+    background: var(--bg-secondary);
+}
+
+.industry-section {
+    margin-bottom: 80px;
+    padding: 60px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.industry-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.industry-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.industry-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* ========================================
    About Section
    ======================================== */
 .about {
