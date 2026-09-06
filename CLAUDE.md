@@ -26,6 +26,14 @@ Supporting files:
 
 ## Development Workflow
 
+### Testing
+
+This is a static site with no build process or testing framework. Manual testing is done by opening the site in a browser and verifying functionality. Focus on:
+- Cross-browser compatibility (Chrome, Firefox, Safari, Edge)
+- Mobile responsiveness at different viewport sizes
+- Form submission through Web3Forms
+- All interactive features (scroll animations, mobile menu, hover effects)
+
 ### Testing Locally
 
 Since this is a static site with no build process, you can:
@@ -63,6 +71,7 @@ The workflow:
 - `SECURITY.md` - Comprehensive security protections and anti-redirect measures
 - `DEPLOYMENT_SUMMARY.md` - Deployment overview and history
 - `PERMANENT_HOSTING.md` - GitHub Pages hosting documentation
+- `README.md` - Minimal file (just credits); not useful for development guidance
 
 ## Architecture Notes
 
