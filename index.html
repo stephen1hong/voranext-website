@@ -530,10 +530,9 @@
                 </div>
             </div>
             <div class="contact-form-wrapper">
-                <form class="contact-form" id="contactForm" action="https://formspree.io/f/mwlkrrbe" method="POST">
-                    <!-- Formspree Configuration -->
-                    <input type="hidden" name="_subject" value="New Contact Form Submission from Voranex.ai">
-                    <input type="hidden" name="_replyto" value="info@voranex.ai">
+                <form class="contact-form" id="contactForm" action="https://voranex-contact-api.voranexai.workers.dev" method="POST">
+                    <!-- Cloudflare Worker API -->
+                    <input type="hidden" name="_honeypot" value="" style="display:none">
 
                     <div class="form-group">
                         <input type="text" name="name" placeholder="Full Name" required>
