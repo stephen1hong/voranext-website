@@ -1774,11 +1774,13 @@ body {
 
 .video-demo-card .video-demo-header h3 {
     font-size: 22px;
+    min-height: 58px;
 }
 
 .video-demo-card .video-demo-header p {
     font-size: 14px;
     max-width: none;
+    min-height: 52px;
 }
 
 .video-demo-card .video-wrapper {
@@ -1788,6 +1790,7 @@ body {
 .video-demo-card .video-demo-info {
     margin-top: 0;
     margin-bottom: 24px;
+    min-height: 78px;
 }
 
 .video-demo-card .video-demo-github {
